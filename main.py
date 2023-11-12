@@ -1,5 +1,6 @@
 import requests
 import json
+import pprint
 
 # Load API Key from config.json
 try:
@@ -35,9 +36,9 @@ def fetch_and_print_status():
     
     data = response.json()
     checks = data['checks']
-    
+
     # Filter checks that are not "up"
-    failed_checks = [check for check in checks if check['status'] != "up"]
+    failed_checks = [check for check in checks if check['status'] != "up" and check['status'] != "started"]
     
     # If there are no failed checks, print a thumbs-up emoji
     if not failed_checks:
